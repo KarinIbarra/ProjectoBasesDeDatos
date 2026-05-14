@@ -24,6 +24,29 @@ public class LevelManager : MonoBehaviour
         Instance = this;
     }
 
+    void Start()
+    {
+        LoadConfigFromDatabase();
+    }
+
+    void LoadConfigFromDatabase()
+    {
+        if (DatabaseManager.Instance != null)
+        {
+            string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            LevelConfig config = DatabaseManager.Instance.GetLevelConfig(sceneName);
+            
+            totalTasks = config.totalTasks;
+            speedMultiplier = config.speedMultiplier;
+            
+            Debug.Log($"Configuración cargada de DB: Tareas={totalTasks}, Multiplicador={speedMultiplier}");
+        }
+        else
+        {
+            Debug.LogWarning("DatabaseManager no encontrado. Usando valores por defecto.");
+        }
+    }
+
     void Update()
     {
         // --- MODO DE PRUEBA (DEBUG) ---
@@ -70,7 +93,13 @@ public class LevelManager : MonoBehaviour
             e.EnableEscapeMode(speedMultiplier);
         }
 
-        Debug.Log("¡FASE DE ESCAPE ACTIVADA! Los enemigos son más rápidos.");
+        // 4. Exportar datos (Punto 9)
+        if (DataExporter.Instance != null)
+        {
+            DataExporter.Instance.ExportAllData();
+        }
+
+        Debug.Log("¡FASE DE ESCAPE ACTIVADA! Los enemigos son más rápidos y se han exportado los datos.");
     }
    
 }
