@@ -49,8 +49,8 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        // --- MODO DE PRUEBA (DEBUG) ---
-        // Al presionar Z, forzamos el inicio del escape
+     
+        // Al presionar Z,abrir la puerta del final
         if (Input.GetKeyDown(KeyCode.Z) && !isEscapePhaseActive)
         {
             Debug.Log("<color=yellow>DEBUG: Tecla Z presionada. Forzando fase de escape...</color>");
@@ -73,27 +73,27 @@ public class LevelManager : MonoBehaviour
 
         isEscapePhaseActive = true;
 
-        // 1. Abrir la puerta físicamente
+        // Abrir la puerta 
         if (exitDoorScript != null)
         {
             exitDoorScript.Open();
         }
 
-        // 2. Mostrar la guía al jugador
+        // Mostrar la flecha
         if (guideArrow != null)
         {
             guideArrow.SetActive(true);
         }
 
-        // 3. Potenciar a los enemigos
-        // Buscamos todos los enemigos que heredan de tu clase base Enemy
+        // Potenciar a los enemigos
+        // buscar todos los enemigos que heredan de la clase Enemy
         Enemy[] allEnemies = Object.FindObjectsOfType<Enemy>();
         foreach (Enemy e in allEnemies)
         {
             e.EnableEscapeMode(speedMultiplier);
         }
 
-        // 4. Exportar datos (Punto 9)
+        //  Exportar datos 
         if (DataExporter.Instance != null)
         {
             DataExporter.Instance.ExportAllData();

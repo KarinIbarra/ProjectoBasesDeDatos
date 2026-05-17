@@ -13,11 +13,10 @@ public class ExitTrigger : MonoBehaviour
             {
                 Debug.Log("¡VICTORIA!");
 
-                // OPCIÓN 1: Reiniciar escena
+                // Reiniciar escena
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-                // OPCIÓN 2 (mejor): cargar escena de victoria
-                // SceneManager.LoadScene("VictoryScene");
+               
             }
         }
     }

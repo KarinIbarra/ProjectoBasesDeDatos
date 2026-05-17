@@ -4,7 +4,7 @@ using System.Collections;
 public class SlidingDoor : MonoBehaviour
 {
     [Header("Configuración de Movimiento")]
-    public Vector3 moveOffset = new Vector3(3f, 0f, 0f); // Cuánto se desplaza (ej: 3 metros en X)
+    public Vector3 moveOffset = new Vector3(3f, 0f, 0f); 
     public float openSpeed = 2f; // Velocidad del movimiento
 
     private Vector3 closedPosition;
@@ -13,9 +13,9 @@ public class SlidingDoor : MonoBehaviour
 
     void Start()
     {
-        // Guardamos la posición inicial como la "cerrada"
+        // la posición inicial como la "cerrada"
         closedPosition = transform.position;
-        // Calculamos la posición final sumando el offset
+        // la posición final sumando el offset
         openPosition = closedPosition + moveOffset;
     }
 
@@ -34,7 +34,7 @@ public class SlidingDoor : MonoBehaviour
         isOpening = true;
         while (Vector3.Distance(transform.position, openPosition) > 0.01f)
         {
-            // Movemos la puerta suavemente hacia la posición abierta
+            // mover la puerta suavemente hacia la posición abierta
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 openPosition,
